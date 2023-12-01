@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 15:30:08 by ptungbun          #+#    #+#              #
-#    Updated: 2023/11/30 20:02:04 by marvin           ###   ########.fr        #
+#    Updated: 2023/12/01 22:05:00 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ BUILD_DIR	=	./build
 # Variable declaration of file
 
 HDFS		=	Zombie.hpp
-SRCS		=	main.cpp zombie.cpp ZombieHorde.cpp
+SRCS		=	main.cpp Zombie.cpp ZombieHorde.cpp
 OBJS		=	$(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
 all: $(NAME)
