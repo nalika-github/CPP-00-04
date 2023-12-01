@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombie.cpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 14:38:56 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/17 18:07:24 by marvin           ###   ########.fr       */
+/*   Created: 2023/11/19 23:32:36 by ptungbun          #+#    #+#             */
+/*   Updated: 2023/11/30 20:09:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef KAREN_H
+# define KAREN_H
+# include <string>
+# include <iostream>
+# include <ostream>
 
-Zombie::Zombie()
-{
-}
+class Harl {
 
-Zombie::~Zombie()
-{
-	std::cout << this->_name << " is died" << std::endl;
-}
+public:
+	Harl(void);
+	~Harl(void);
 
-void	Zombie::announce(void)
-{
-	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-}
+	void	complain(std::string level);
 
-void	Zombie::setName(std::string name)
-{
-	this->_name = name;
-}
+private:
+	void	_error(void);
+	void	_warning(void);
+	void	_info(void);
+	void	_debug(void);
+
+};
+
+#endif

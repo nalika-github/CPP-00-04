@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:48:37 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/19 22:41:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/01 15:23:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 HumanB::HumanB(std::string name): _weapon(0)
 {
+	std::cout << "HumanB Constructor called" << std::endl;
 	this->_name = name;
 }
 
 HumanB::~HumanB()
 {
+	std::cout << "HumanB Destructor called" << std::endl;
 }
 
 void HumanB::attack()

@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:02:12 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/06 10:38:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/01 13:59:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
-Contact::Contact(void)
+PhoneBook::PhoneBook(void):
+_n_row(0)
 {
-	this->first_name = "";
-	this->last_name = "";
-	this->nickname = "";
-	this->phone_number = "";
-	this->darkness_secret = "";
-}
-
-Contact::~Contact(void)
-{
-	;
-}
-
-PhoneBook::PhoneBook(void)
-{
-	this->_n_row = 0;
 }
 
 PhoneBook::~PhoneBook(void) {
@@ -67,21 +53,21 @@ void	PhoneBook::_table_contact_display(void)
 	int		i;
 	Contact	ct;
 
-	i = this->_n_row - 1;
+	i = _n_row - 1;
 	while(i >= 0)
 	{
-		ct = this->_lst[i];
+		ct = _lst[i];
 		std::cout << "|";
-		std::cout << "    " << (this->_n_row - i) << "     ";
-		std::cout << "|";
-		std::cout.width(10);
-		std::cout << std::right << this->_fit_cell(ct.first_name);
+		std::cout << "    " << (_n_row - i) << "     ";
 		std::cout << "|";
 		std::cout.width(10);
-		std::cout << std::right << this->_fit_cell(ct.last_name);
+		std::cout << std::right << _fit_cell(ct.getFirstName());
 		std::cout << "|";
 		std::cout.width(10);
-		std::cout << std::right << this->_fit_cell(ct.nickname);
+		std::cout << std::right << _fit_cell(ct.getLastName());
+		std::cout << "|";
+		std::cout.width(10);
+		std::cout << std::right << _fit_cell(ct.getNickName());
 		std::cout << "|";
 		std::cout << std::endl;
 		std::cout << "+";
@@ -111,11 +97,11 @@ std::string	PhoneBook::_fit_cell(std::string word)
 void	PhoneBook::display_search_resule(int index)
 {
 	std::cout << std::endl;
-	std::cout << "firstname: " << YELB << (this->_lst[this->_n_row - index]).first_name << RESET << std::endl;
-	std::cout << "lastname: " << YELB << (this->_lst[this->_n_row - index]).last_name << RESET << std::endl;
-	std::cout << "nickname: "  << YELB << (this->_lst[this->_n_row - index]).nickname << RESET << std::endl;
-	std::cout << "telephhone: " << YELB << (this->_lst[this->_n_row - index]).phone_number << RESET << std::endl;
-	std::cout << "darkness_secret: " << YELB << (this->_lst[this->_n_row - index]).darkness_secret << RESET << std::endl;
+	std::cout << "firstname: " << YELB << (_lst[_n_row - index]).getFirstName() << RESET << std::endl;
+	std::cout << "lastname: " << YELB << (_lst[_n_row - index]).getLastName() << RESET << std::endl;
+	std::cout << "nickname: "  << YELB << (_lst[_n_row - index]).getNickName() << RESET << std::endl;
+	std::cout << "telephhone: " << YELB << (_lst[_n_row - index]).getPhoneNumber() << RESET << std::endl;
+	std::cout << "darkness_secret: " << YELB << (_lst[_n_row - index]).getDarknessSecrete() << RESET << std::endl;
 	std::cout << std::endl;
 }
 
@@ -124,13 +110,13 @@ void	PhoneBook::excuse_search(void)
 	std::string	search;
 	int	search_index;
 
-	if (this->_n_row == 0)
+	if (_n_row == 0)
 	{
 		std::cout << YELB << "\nEmpty PhoneBook not thing to SEARCH\n\n" << RESET;
 		return ;
 	}
-	this->_table_header_display();
-	this->_table_contact_display();
+	_table_header_display();
+	_table_contact_display();
 	std::cout << std::endl;
 	while(true)
 	{
@@ -141,7 +127,7 @@ void	PhoneBook::excuse_search(void)
 			continue ;
 		}
 		std::istringstream(search) >> search_index;
-		if (search_index > this->_n_row)
+		if (search_index > _n_row)
 		{
 			std::cout << REDB << search_index << " is out of range" << RESET << std::endl;
 			continue ;
@@ -151,14 +137,18 @@ void	PhoneBook::excuse_search(void)
 	display_search_resule(search_index);
 }
 
-bool	PhoneBook::isnumber(std::string &s)
+bool	PhoneBook::isnumber(std::string str)
 {
-	std::string::const_iterator it = s.begin();
-	while (it != s.end())
+	int	size;
+	int	i;
+
+	size = str.size();
+	i = 0;
+	while (i < size)
 	{
-		if(!std::isdigit(*it))
+		if(!std::isdigit(str.at(i)))
 			return (false);
-		++it;
+		i++;
 	}
 	return (true);
 }
@@ -185,23 +175,23 @@ void	PhoneBook::excuse_add(void)
 {
 	std::cout << std::endl;
 	std::cout << GRNB << "----ADD NEW CONTACT----\n\n" << RESET;
-	if (this->_n_row == LIMMIT_SIZE)
+	if (_n_row == LIMMIT_SIZE)
 	{
-		this->_re_arrange();
-		(this->_lst[this->_n_row - 1]).first_name = getline_loop("First Name: ", "please input First Name data", GRNB, REDB);
-		(this->_lst[this->_n_row - 1]).last_name = getline_loop("Last Name: ", "please input Last Name data", GRNB, REDB);
-		(this->_lst[this->_n_row - 1]).nickname = getline_loop("Nickname: ", "please input Nickname data", GRNB, REDB);
-		(this->_lst[this->_n_row - 1]).phone_number = getline_loop("Phone Number: ", "please input Phone Number data", GRNB, REDB);
-		(this->_lst[this->_n_row - 1]).darkness_secret = getline_loop("Darkness Secrete: ", "please input Darkness Secret data", GRNB, REDB);
+		_re_arrange();
+		(_lst[_n_row - 1]).setFirstName(getline_loop("First Name: ", "please input First Name data", GRNB, REDB));
+		(_lst[_n_row - 1]).setLastName(getline_loop("Last Name: ", "please input Last Name data", GRNB, REDB));
+		(_lst[_n_row - 1]).setNickName(getline_loop("Nickname: ", "please input Nickname data", GRNB, REDB));
+		(_lst[_n_row - 1]).setPhoneNumber(getline_loop("Phone Number: ", "please input Phone Number data", GRNB, REDB));
+		(_lst[_n_row - 1]).setDarknessSecrete(getline_loop("Darkness Secrete: ", "please input Darkness Secret data", GRNB, REDB));
 		return ;
 	}
-	(this->_lst[this->_n_row]).first_name = getline_loop("first name: ", "please input first name data", GRNB, REDB);
-	(this->_lst[this->_n_row]).last_name = getline_loop("last name: ", "please input last name data", GRNB, REDB);
-	(this->_lst[this->_n_row]).nickname = getline_loop("nickname: ", "please input nickname data", GRNB, REDB);
-	(this->_lst[this->_n_row]).phone_number = getline_loop("phone number: ", "please input phone number data", GRNB, REDB);
-	(this->_lst[this->_n_row]).darkness_secret = getline_loop("darkness secrete: ", "please input darkness secret data", GRNB, REDB);
+	(_lst[_n_row]).setFirstName(getline_loop("First Name: ", "please input First Name data", GRNB, REDB));
+	(_lst[_n_row]).setLastName(getline_loop("Last Name: ", "please input Last Name data", GRNB, REDB));
+	(_lst[_n_row]).setNickName(getline_loop("Nickname: ", "please input Nickname data", GRNB, REDB));
+	(_lst[_n_row]).setPhoneNumber(getline_loop("Phone Number: ", "please input Phone Number data", GRNB, REDB));
+	(_lst[_n_row]).setDarknessSecrete(getline_loop("Darkness Secrete: ", "please input Darkness Secret data", GRNB, REDB));
 	std::cout << std::endl;
-	this->_n_row += 1;
+	_n_row += 1;
 }
 
 void	PhoneBook::_re_arrange(void)
@@ -211,7 +201,7 @@ void	PhoneBook::_re_arrange(void)
 	i = 1;
 	while (i < LIMMIT_SIZE)
 	{
-		(this->_lst)[i - 1] = (this->_lst)[i];
+		(_lst)[i - 1] = (_lst)[i];
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:40:58 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/19 21:57:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/01 15:19:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Zombie {
 		std::string	_name;
 };
 
-Zombie*	zombieHorde( int N, std::string name);
+Zombie*	ZombieHorde( int N, std::string name);
 Zombie*	newZombie(std::string name);
 
 #endif

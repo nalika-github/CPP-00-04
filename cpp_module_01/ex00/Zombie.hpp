@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:40:58 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/12 14:42:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/01 15:18:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # include <iostream>
 # include <string>
 
-class Zombie {
+class Zombie
+{
 	public:
 		Zombie(std::string name);
 		~Zombie (void);

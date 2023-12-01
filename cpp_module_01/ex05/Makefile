@@ -6,11 +6,11 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 15:30:08 by ptungbun          #+#    #+#              #
-#    Updated: 2023/11/19 23:34:05 by marvin           ###   ########.fr        #
+#    Updated: 2023/12/01 14:53:48 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Karen
+NAME		=	Harl
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
@@ -20,7 +20,8 @@ BUILD_DIR	=	./build
 
 # Variable declaration of file
 
-SRCS		=	main.cpp Karen.cpp
+HDFS		=	Harl.hpp
+SRCS		=	main.cpp Harl.cpp
 OBJS		=	$(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
 all: $(NAME)
@@ -30,7 +31,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJS): $(BUILD_DIR)/%.o: %.cpp
+$(OBJS): $(BUILD_DIR)/%.o: %.cpp $(HDFS)
 	@mkdir -p $(@D)
 	@$(CPP) $(CPPFLAGS) -c $< -o $@
 

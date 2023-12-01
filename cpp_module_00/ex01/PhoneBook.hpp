@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:37:03 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/06 10:33:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/01 13:16:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHONEBOOK_H
 # include <iostream>
 # include <sstream>
+# include "Contact.hpp"
 
 /* text color */
 # define RED "\e[0;31m"
@@ -36,19 +37,6 @@
 # define RESET "\033[0m"
 # define LIMMIT_SIZE	8
 
-class Contact
-{
-	public:
-		Contact(void);
-		~Contact(void);
-
-		std::string first_name;
-		std::string last_name;
-		std::string nickname;
-		std::string phone_number;
-		std::string darkness_secret;
-};
-
 class PhoneBook
 {
 	public:
@@ -60,7 +48,7 @@ class PhoneBook
 		void		excuse_add(void);
 		void		init_set(void);
 		std::string	getline_loop(std::string prompt_msg ,std::string err_msg, std::string prompt_color, std::string err_color);
-		bool		isnumber(std::string &s);
+		bool		isnumber(std::string str);
 		void		display_search_resule(int search_index);
 
 	private:
