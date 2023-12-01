@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:38:56 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/12/01 15:21:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/01 23:16:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Zombie::Zombie(std::string name)
 
 Zombie::~Zombie()
 {
-	std::cout << this->_name << " is died" << std::endl;
+	std::cout << std::endl;
 }
 
 void	Zombie::announce( void )
