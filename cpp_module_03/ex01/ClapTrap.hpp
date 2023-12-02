@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:35 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/28 02:17:40 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 14:02:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ class ClapTrap
 		int		GetHitPoint(void);
 		int		GetAttackDamage(void);
 		std::string	GetName(void);
+
+		ClapTrap &operator = (const ClapTrap &src);
 
 	protected:
 

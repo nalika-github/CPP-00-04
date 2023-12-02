@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:35 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/28 02:14:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 14:36:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ class ScavTrap: public ClapTrap
 		~ScavTrap(void);
 
 		void	guardGate(void);
+		void	attack(const std::string& target);
+
+		ScavTrap &operator = (const ScavTrap &src);
 };
 
 #endif

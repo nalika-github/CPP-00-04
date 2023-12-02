@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:15 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/28 01:43:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 12:58:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ ClapTrap::ClapTrap(std::string name): _name(name), _hit_point(10), _energy_point
 ClapTrap::~ClapTrap()
 {
 	std::cout << "ClapTrap Deconstructor for " << this->_name << " called" << std::endl;
+}
+
+ClapTrap &ClapTrap::operator = (const ClapTrap &src)
+{
+	std::cout << "ClapTrap Assignation operator called" << std::endl;
+	this->_name = src._name;
+	this->_hit_point = src._hit_point;
+	this->_energy_point = src._energy_point;
+	this->_attack_damage = src._attack_damage;
+	return (*this);
 }
 
 void	ClapTrap::attack(const std::string &target)

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 15:30:08 by ptungbun          #+#    #+#              #
-#    Updated: 2023/11/26 14:35:06 by marvin           ###   ########.fr        #
+#    Updated: 2023/12/02 12:56:31 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ BUILD_DIR	=	./build
 
 # Variable declaration of file
 
+HDFS		=	ClapTrap.hpp
 SRCS		=	main.cpp ClapTrap.cpp
 OBJS		=	$(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
@@ -30,7 +31,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJS): $(BUILD_DIR)/%.o: %.cpp
+$(OBJS): $(BUILD_DIR)/%.o: %.cpp $(HDFS)
 	@mkdir -p $(@D)
 	@$(CPP) $(CPPFLAGS) -c $< -o $@
 
