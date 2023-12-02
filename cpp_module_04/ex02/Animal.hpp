@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:35 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/30 15:57:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:25:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ class Animal
 
 	protected:
 
+		Animal(void);
+		Animal(Animal const &copy);
+		virtual ~Animal(void);
 		std::string	_type;
+
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:15 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/30 14:16:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:18:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ Cat::~Cat()
 {
 	delete this->_brain;
 	std::cout << "Cat Deconstructor called" << std::endl;
+}
+
+Cat &Cat::operator = (const Cat &src)
+{
+	std::cout << "Cat Assignation operator called" << std::endl;
+	if (this == &src)
+		return *this;
+	this->_type = src.getType();
+	*this->_brain = *src._brain;
+	return (*this);
 }
 
 std::string	Cat::getType(void) const

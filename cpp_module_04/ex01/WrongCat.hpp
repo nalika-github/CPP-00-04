@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:35 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/29 11:20:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:11:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class WrongCat: public WrongAnimal
 		WrongCat(void);
 		WrongCat(WrongCat const &copy);
 		~WrongCat(void);
+		WrongCat &operator=(const WrongCat &src);
 
 		std::string	getType(void) const;
 		void makeSound(void) const;

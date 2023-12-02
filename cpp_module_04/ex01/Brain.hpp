@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:35 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/30 15:41:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:09:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Brain
 
 		void		write_idea(std::string idea, int index);
 		std::string	grab_idea(int index);
+		Brain &operator=(const Brain &src);
 
 	private:
 

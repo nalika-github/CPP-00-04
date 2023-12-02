@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:15 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/30 14:08:12 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 01:21:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ Brain::Brain(Brain const &copy)
 Brain::~Brain()
 {
 	std::cout << "Brain Deconstructor called" << std::endl;
+}
+
+Brain &Brain::operator = (const Brain &src)
+{
+	std::cout << "Brain Assignation operator called" << std::endl;
+	if (this == &src)
+		return *this;
+	for (int i = 0; i < 100; i++)
+	{
+		if (src._ideas[i].length() > 0)
+			this->_ideas[i].assign(src._ideas[i]);
+	}
+	return *this;
 }
 
 void	Brain::write_idea(std::string idea, int index)

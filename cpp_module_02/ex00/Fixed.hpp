@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:28 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:02:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 01:36:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ public:
 	Fixed(Fixed const &src);
 	~Fixed(void);
 
-	Fixed &	operator= (Fixed const & src);
+	Fixed &	operator = (Fixed const & src);
 
 	int		getRawBits(void) const;
 	void	setRawBits(int const RawBits);

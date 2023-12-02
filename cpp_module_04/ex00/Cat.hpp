@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:24:35 by ptungbun          #+#    #+#             */
-/*   Updated: 2023/11/29 17:22:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:05:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class Cat: public Animal
 		Cat(void);
 		Cat(Cat const &copy);
 		~Cat(void);
+		Cat &operator=(const Cat &src);
 
 		std::string	getType(void)const;
 		void makeSound(void)const;
