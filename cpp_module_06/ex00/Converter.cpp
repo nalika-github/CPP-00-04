@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 23:56:21 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/02/17 18:54:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/02/22 16:41:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,38 @@
 ScalarConverter::ScalarConverter(const std::string &input):
 input(input)
 {
-	is_Invalide = is
+	type_Special = typeSpecial();
+	is_valideInput = isvalideInput();
 	is_inputzero = isInputZero();
-	is_number = isInputNumber();
-	std::istringstream(input) >> i;
+	d = std::strtod(input.c_str(), NULL);
+	i = static_cast<int>(d);
 	getCharInput();
-	std::istringstream(input) >> d;
-	std::istringstream(input) >> f;
+	f = std::strtof(input.c_str(), NULL);
 }
 
 ScalarConverter::~ScalarConverter()
 {
+}
+
+bool	ScalarConverter::isvalideInput()
+{
+	int	dot;
+	int	f;
+
+	dot = 0;
+	f = 0;
+	for(std::string::const_iterator it = input.begin(); it != input.end(); it++)
+	{
+		if (*it == '.')
+			dot++;
+		else if (*it == 'f')
+			f++;
+	}
+	if ((f > 1 || dot > 1) && type_Special == 0)
+		return false;
+	if (f > 0 && *(input.end() - 1) != 'f')
+		return false;
+	return true;
 }
 
 bool	ScalarConverter::isInputZero()
@@ -44,9 +65,22 @@ bool	ScalarConverter::isInputZero()
 		else if (*it == 'f')
 			f++;
 		if (*it != 'f' && *it != '.'&& *it != '0')
+		{
+			std::cout << "false\n";
 			return false;
+		}
 	}
+	std::cout << "true\n";
 	return true;
+}
+
+int	ScalarConverter::typeSpecial()
+{
+	if (input == "+inf" || input == "-inf" || input == "nan")
+		return 1;
+	else if (input == "+inff" || input == "-inff" || input == "nanf")
+		return 2;
+	return 0;
 }
 
 void	ScalarConverter::getCharInput()
@@ -54,7 +88,7 @@ void	ScalarConverter::getCharInput()
 	if (input.size() == 1 && (std::isalpha(input[0])))
 		c = input[0];
 	else
-		c = i;
+		c = static_cast<char>(d);;
 }
 
 ScalarConverter &ScalarConverter::operator = (const ScalarConverter &rhs)
@@ -79,18 +113,64 @@ void	ScalarConverter::printChar(void)
 		std::cout << "char: '" << c << "'" << std::endl;
 }
 
+void	ScalarConverter::printInt(void)
+{
+	if ((!is_inputzero && d == 0) || type_Special > 0)
+		std::cout << "int: imposible" << std::endl;
+	else if (d > INT_MAX || d < INT_MIN)
+		std::cout << "int: overflow" << std::endl;
+	else
+		std::cout << "int: " << i << std::endl;
+}
+
+void	ScalarConverter::printDouble(void)
+{
+	if (!is_inputzero && d == 0)
+		std::cout << "double: imposible" << std::endl;
+	else if (type_Special == 1)
+		std::cout << "double: " << input << std::endl;
+	else if (type_Special == 2)
+	{
+		if (input == "+inff")
+			std::cout << "double: " << "+inf" << std::endl;
+		else if (input == "-inff")
+			std::cout << "double: " << "-inf" << std::endl;
+		else if (input == "nanf")
+			std::cout << "double: " << "nan" << std::endl;
+	}
+	else if ((floor(d) - d) == 0)
+		std::cout << "double: " << d << ".0" << std::endl;
+	else
+		std::cout << "double: " << d << std::endl;
+}
+
+void	ScalarConverter::printFloat(void)
+{
+	if ((!is_inputzero && d == 0) && type_Special == 0)
+		std::cout << "float: imposible" << std::endl;
+	else if (type_Special == 1)
+		std::cout << "float: " << input << "f" << std::endl;
+	else if (type_Special == 2)
+		std::cout << "float: " << input << std::endl;
+	else if ((floor(f) - f) == 0)
+		std::cout << "float: " << d << ".0f" << std::endl;
+	else
+		std::cout << "float: " << d << "f" << std::endl;
+}
+
 void	ScalarConverter::convert(const std::string &input)
 {
 	ScalarConverter	SC = ScalarConverter(input);
 
-	// std::cout << "char: '" << SC.c << "'" << std::endl;
-	// std::cout << "i = " << SC.i << std::endl;
-	// std::cout << "d = " << SC.d << std::endl;
-	// std::cout << "f = " << SC.f << std::endl;
-	SC.printChar();
-	// SC.printInt();
-	// SC.printDouble();
-	// SC.printFloat();
+	if (!SC.isvalideInput())
+		std::cout << "Invalid input" << std::endl;
+	else
+	{
+		SC.printChar();
+		SC.printInt();
+		SC.printDouble();
+		SC.printFloat();
+	}
 }
 
 // void	ScalarConverter::convert(const std::string &input)
@@ -128,3 +208,11 @@ void	ScalarConverter::convert(const std::string &input)
 	// std::cout << "d = " << d << std::endl;
 	// std::cout << "f = " << f << std::endl;
 // }
+
+// // ตัวอย่างการแปลงประเภทข้อมูล
+// float f = 3.14;
+// int i = static_cast<int>(f); // แปลงค่าทศนิยมเป็นเลขจำนวนเต็ม
+
+// // ตัวอย่างการแปลง pointer
+// Base* basePtr = new Derived();
+// Derived* derivedPtr = static_cast<Derived*>(basePtr); // แปลง pointer จาก Base เป็น Derived (downcasting)

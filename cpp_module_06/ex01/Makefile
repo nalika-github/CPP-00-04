@@ -6,11 +6,11 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 15:30:08 by ptungbun          #+#    #+#              #
-#    Updated: 2024/02/22 18:29:44 by marvin           ###   ########.fr        #
+#    Updated: 2024/02/22 18:30:18 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Converter
+NAME		=	Serialization
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
@@ -20,9 +20,9 @@ BUILD_DIR	=	./build
 
 # Variable declaration of file
 
-SRCS		=	Converter.cpp main.cpp
+SRCS		=	data.cpp main.cpp
 
-HDFS		=	Converter.hpp
+HDFS		=	data.hpp
 
 OBJS		=	$(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
