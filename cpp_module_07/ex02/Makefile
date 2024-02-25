@@ -6,11 +6,11 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 15:30:08 by ptungbun          #+#    #+#              #
-#    Updated: 2024/02/25 19:35:18 by marvin           ###   ########.fr        #
+#    Updated: 2024/02/25 21:16:39 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	whatever
+NAME		=	Array
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
@@ -22,7 +22,7 @@ BUILD_DIR	=	./build
 
 SRCS		=	main.cpp
 
-HDFS		=	whatever.hpp
+HDFS		=	Array.hpp
 
 OBJS		=	$(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
