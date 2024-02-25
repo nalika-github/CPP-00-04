@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 23:56:21 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/02/22 16:41:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/02/25 16:53:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ bool	ScalarConverter::isInputZero()
 		else if (*it == 'f')
 			f++;
 		if (*it != 'f' && *it != '.'&& *it != '0')
-		{
-			std::cout << "false\n";
 			return false;
-		}
 	}
 	std::cout << "true\n";
 	return true;
@@ -172,47 +169,3 @@ void	ScalarConverter::convert(const std::string &input)
 		SC.printFloat();
 	}
 }
-
-// void	ScalarConverter::convert(const std::string &input)
-// {
-	// char	c;
-	// int		i;
-	// double	d;
-	// float	f;
-
-	// std::istringstream(input) >> i;
-	// std::istringstream(input) >> d;
-	// std::istringstream(input) >> f;
-	// is_inputzero(input);
-	// if (input.size() == 1 && (std::isalpha(input[0])))
-	// {
-	// 	i = input[0];
-	// 	c = i;
-	// 	if (std::isprint(c))
-	// 		std::cout << "char: '" << c << "'" << std::endl;
-	// 	else
-	// 		std::cout << "char: Non displayable" << std::endl;
-	// }
-	// else if (d && i == d)
-	// {
-	// 	c = i;
-	// 	if (std::isprint(c))
-	// 		std::cout << "char: '" << c << "'" << std::endl;
-	// 	else
-	// 		std::cout << "char: Non displayable" << std::endl;
-	// }
-	// else
-	// 	std::cout << "char: imposible"  << std::endl;
-	// if (i )
-	// std::cout << "i = " << i << std::endl;
-	// std::cout << "d = " << d << std::endl;
-	// std::cout << "f = " << f << std::endl;
-// }
-
-// // ตัวอย่างการแปลงประเภทข้อมูล
-// float f = 3.14;
-// int i = static_cast<int>(f); // แปลงค่าทศนิยมเป็นเลขจำนวนเต็ม
-
-// // ตัวอย่างการแปลง pointer
-// Base* basePtr = new Derived();
-// Derived* derivedPtr = static_cast<Derived*>(basePtr); // แปลง pointer จาก Base เป็น Derived (downcasting)
