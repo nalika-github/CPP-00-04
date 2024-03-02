@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 19:57:22 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/02/25 21:23:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/02/27 10:42:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <iostream>
 
-template <typename Type> class Array
+template <typename Type>
+class Array
 {
 	private:
 		Type			*array;
