@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:14:29 by ptungbun          #+#    #+#             */
-/*   Updated: 2024/03/10 21:04:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/10 21:32:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,97 @@ void	PmergeMe::display(const std::string& msg, const std::deque<int>& arr)
 	std::cout << "\n";
 }
 
-void	PmergeMe::mergeInsertSort(std::vector<int>& arr)
-{
-	for (size_t i = 1; i < arr.size(); ++i)
-	{
-		int key = arr[i];
-		int j = i - 1;
-		while (j >= 0 && arr[j] > key)
-		{
-			arr[j + 1] = arr[j];
-			j = j - 1;
+void	PmergeMe::insertionSort(std::vector<int>& A, int p, int q) {
+	for (int i = p; i < q; i++) {
+		int tempVal = A[i + 1];
+		int j = i + 1;
+		while (j > p && A[j - 1] > tempVal) {
+			A[j] = A[j - 1];
+			j--;
 		}
-		arr[j + 1] = key;
+		A[j] = tempVal;
 	}
 }
 
-void	PmergeMe::mergeInsertSort(std::deque<int>& arr)
-{
-	for (size_t i = 1; i < arr.size(); ++i)
-	{
-		int key = arr[i];
-		int j = i - 1;
-		while (j >= 0 && arr[j] > key)
-		{
-			arr[j + 1] = arr[j];
-			j = j - 1;
+void	PmergeMe::merge(std::vector<int>& A, int p, int q, int r) {
+	int n1 = q - p + 1;
+	int n2 = r - q;
+	std::vector<int> LA(A.begin() + p, A.begin() + q + 1);
+	std::vector<int> RA(A.begin() + q + 1, A.begin() + r + 1);
+	int RIDX = 0;
+	int LIDX = 0;
+	for (int i = p; i <= r; i++) {
+		if (RIDX == n2) {
+			A[i] = LA[LIDX];
+			LIDX++;
+		} else if (LIDX == n1) {
+			A[i] = RA[RIDX];
+			RIDX++;
+		} else if (RA[RIDX] > LA[LIDX]) {
+			A[i] = LA[LIDX];
+			LIDX++;
+		} else {
+			A[i] = RA[RIDX];
+			RIDX++;
 		}
-		arr[j + 1] = key;
+	}
+}
+
+void	PmergeMe::sort(std::vector<int>& A, int p, int r) {
+	if (r - p > K) {
+		int q = (p + r) / 2;
+		sort(A, p, q);
+		sort(A, q + 1, r);
+		merge(A, p, q, r);
+	} else {
+		insertionSort(A, p, r);
+	}
+}
+
+void	PmergeMe::insertionSort(std::deque<int>& A, int p, int q) {
+	for (int i = p; i < q; i++) {
+		int tempVal = A[i + 1];
+		int j = i + 1;
+		while (j > p && A[j - 1] > tempVal) {
+			A[j] = A[j - 1];
+			j--;
+		}
+		A[j] = tempVal;
+	}
+}
+
+void	PmergeMe::merge(std::deque<int>& A, int p, int q, int r) {
+	int n1 = q - p + 1;
+	int n2 = r - q;
+	std::deque<int> LA(A.begin() + p, A.begin() + q + 1);
+	std::deque<int> RA(A.begin() + q + 1, A.begin() + r + 1);
+	int RIDX = 0;
+	int LIDX = 0;
+	for (int i = p; i <= r; i++) {
+		if (RIDX == n2) {
+			A[i] = LA[LIDX];
+			LIDX++;
+		} else if (LIDX == n1) {
+			A[i] = RA[RIDX];
+			RIDX++;
+		} else if (RA[RIDX] > LA[LIDX]) {
+			A[i] = LA[LIDX];
+			LIDX++;
+		} else {
+			A[i] = RA[RIDX];
+			RIDX++;
+		}
+	}
+}
+
+void	PmergeMe::sort(std::deque<int>& A, int p, int r) {
+	if (r - p > K) {
+		int q = (p + r) / 2;
+		sort(A, p, q);
+		sort(A, q + 1, r);
+		merge(A, p, q, r);
+	} else {
+		insertionSort(A, p, r);
 	}
 }
 
@@ -82,11 +146,11 @@ void	PmergeMe::sortAndDisplay(void)
 {
 	std::clock_t start_time1 = std::clock();
 	std::vector<int> data_copy1(data);
-	mergeInsertSort(data_copy1);
+	sort(data_copy1, 0, data_copy1.size() - 1);
 	std::clock_t end_time1 = std::clock();
 	std::clock_t start_time2 = std::clock();
 	std::deque<int> data_copy2(data.begin(), data.end());
-	mergeInsertSort(data_copy2);
+	sort(data_copy2, 0, data_copy2.size() - 1);
 	std::clock_t end_time2 = std::clock();
 	display("Before: ", data);
 	display("After: ", data_copy1);
